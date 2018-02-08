@@ -11,7 +11,7 @@
       public function index()
       {
         $this->load->view('layouts/header');
-        $this->load->view('layouts/nav');
+        $this->load->view('pages/accueil');
         $this->load->view('layouts/footer');
       }
 
@@ -21,7 +21,6 @@
         $this->load->model("membre_model");
         $data["liste_membre"] = $this->membre_model->lister_membre_asc();
         $this->load->view('layouts/header');
-        $this->load->view('layouts/nav');
         $this->load->view('pages/membre/membre', $data);
         $this->load->view('layouts/footer');
       }
@@ -81,7 +80,6 @@
     		else
     		{
     			$this->load->view('layouts/header');
-    			$this->load->view('layouts/nav');
     			$this->load->view('pages/membre/ajout_membre');
     			$this->load->view('layouts/footer');
     		}
@@ -93,7 +91,6 @@
         $this->load->model("membre_model");
         $data['membre'] = $this->membre_model->fetch_single_membre($id_membre);
         $this->load->view('layouts/header');
-        $this->load->view('layouts/nav');
         $this->load->view('pages/membre/detail_membre', $data);
         $this->load->view('layouts/footer');
       }
@@ -155,7 +152,6 @@
           $this->load->model("membre_model");
           $data['membre'] = $this->membre_model->fetch_single_membre($id_membre);
     			$this->load->view('layouts/header');
-    			$this->load->view('layouts/nav');
     			$this->load->view('pages/membre/modifier_membre', $data);
     			$this->load->view('layouts/footer');
     		}
@@ -197,7 +193,6 @@
           $this->load->model("visite_model");
           $data["visite_actuel"] = $this->visite_model->lister_visite_actuel();
     			$this->load->view('layouts/header');
-    			$this->load->view('layouts/nav');
     			$this->load->view('pages/visite/enregistrer_visite');
           $this->load->view('pages/visite/visite_actuel', $data);
     			$this->load->view('layouts/footer');
@@ -210,5 +205,11 @@
         $this->load->model('visite_model');
     		$this->visite_model->enregistrer_sortie($id_visite);
     		redirect(site_url('fablab/visite'));
+      }
+
+      public function test()
+      {
+        $this->load->view('header');
+        $this->load->view('footer');
       }
 }

@@ -23,9 +23,9 @@
           <td><?php echo $visite->date_visite;?></td>
           <td><?php echo $visite->heure_entre;?></td>
           <td><?php echo $visite->id_membre;?></td>
-          <td><a class="btn btn-floating" href="<?= site_url('fablab/enregistrer_sortie').'/'.$visite->id_visite;?>"><i class="material-icons">exit_to_app</i></a></td>
-          <td><a class="btn btn-floating waves-effect waves-light blue darken-3" href="<?= site_url('fablab/modifier_visite').'/'.$visite->id_membre;?>"><i class="material-icons">edit</i></a></td>
-          <td><a class="btn btn-floating waves-effect waves-light red" href="<?= site_url('fablab/suppression_visite').'/'.$visite->id_membre;?>"><i class="material-icons">delete</i></a></td>
+          <td><a class="btn btn-floating" href="<?= site_url('fablab/enregistrer_sortie').'/'.$visite->id_visite;?>"><i class="mdi-action-exit-to-app"></i></a></td>
+          <td><a class="btn btn-floating waves-effect waves-light blue darken-3" href="<?= site_url('fablab/modifier_visite').'/'.$visite->id_membre;?>"><i class="mdi-editor-mode-edit"></i></a></td>
+          <td><a class="btn btn-floating waves-effect waves-light red" href="<?= site_url('fablab/suppression_visite').'/'.$visite->id_membre;?>"><i class="mdi-action-delete"></i></a></td>
         </tr>
       <?php endforeach;?>
     </tbody>
