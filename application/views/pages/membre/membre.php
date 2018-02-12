@@ -20,7 +20,7 @@
       <?php foreach($liste_membre->result() as $membre):
         $nbr_membre += 1;
        endforeach;?>
-       Nombre membres : <?= $nbr_membre;?>
+       Nombre membres : <?= $nbr_membre;?><br><br>
       <div>
       <table class="centered">
         <thead>
@@ -29,6 +29,8 @@
             <th>Nom</th>
             <th>Prénom(s)</th>
             <th>Email</th>
+            <th>Date d'adhésion</th>
+            <th>Reçu par</th>
             <th colspan="3">Options</th>
           <tr>
         </thead>
@@ -39,6 +41,8 @@
             <td><?php echo $membre->nom_membre;?></td>
             <td><?php echo $membre->prenom_membre;?></td>
             <td><?php echo $membre->email;?></td>
+            <td><?php echo $membre->adhesion;?></td>
+            <td><?php echo $membre->recu_par;?></td>
             <td><a class="btn btn-floating" href="<?= site_url('fablab/detail_membre').'/'.$membre->id_membre;?>"><i class="mdi-action-visibility"></i></a></td>
             <td><a class="btn btn-floating blue darken-3" href="<?= site_url('fablab/modifier_membre').'/'.$membre->id_membre;?>"><i class="mdi-editor-mode-edit"></i></a></td>
             <td><a class="btn btn-floating red" href="<?= site_url('fablab/suppression_membre').'/'.$membre->id_membre;?>"><i class="mdi-action-delete"></i></a></td>

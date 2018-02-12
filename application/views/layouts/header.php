@@ -5,16 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="msapplication-tap-highlight" content="no">
-    <title>Habaka - Fablab</title>
+    <title>Gestion-Habaka-Fablab</title>
 
     <!-- Favicons-->
-    <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" href="<?php echo img_url("favicon-32x32.png"); ?>" sizes="32x32">
     <!-- Favicons-->
-    <link rel="apple-touch-icon-precomposed" href="images/favicon/apple-touch-icon-152x152.png">
-    <!-- For iPhone -->
-    <meta name="msapplication-TileColor" content="#00bcd4">
-    <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
-    <!-- For Windows Phone -->
+    <link rel="apple-touch-icon-precomposed" href="<?php echo img_url("favicon-152x152.png"); ?>">
 
 
     <!-- CORE CSS-->
@@ -22,6 +18,7 @@
     <link href="<?php echo css_url("style.min"); ?>" type="text/css" rel="stylesheet" media="screen,projection">
     <!-- Custome CSS-->
     <link href="<?php echo css_url("custom/custom.min"); ?>" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="<?php echo css_url("custom/custom"); ?>" type="text/css" rel="stylesheet" media="screen,projection">
 
 
     <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
@@ -50,8 +47,11 @@
             <nav class="navbar-color">
                 <div class="nav-wrapper">
                     <ul class="left">
-                      <li><h1 class="logo-wrapper"><a href="index.html" class="brand-logo darken-1"><img src="images/materialize-logo.png" alt="Fablab Logo"></a> <span class="logo-text">HABAKA FABLAB</span></h1></li>
+                      <li><h1 class="logo-wrapper"><a href="<?php echo site_url("fablab/index"); ?>" class="brand-logo darken-1"><img src="<?php echo img_url("Fablab-logo"); ?>" alt="Fablab Logo"></a> <span class="logo-text">HABAKA FABLAB</span></h1></li>
                     </ul>
+                </div>
+            </nav>
+        </div>
     </header>
     <!-- END HEADER -->
 
@@ -77,11 +77,15 @@
                             <li><a href="#"><i class="mdi-action-settings"></i> Config</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
+                            <li><a href="<?= site_url('fablab/logout');?>"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
                             </li>
                         </ul>
-                        <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">John Doe<i class="mdi-navigation-arrow-drop-down right"></i></a>
-                        <p class="user-roal">Administrator</p>
+                        <?php
+                          $user = $this->ion_auth->user()->row();
+                          $groups = $this->ion_auth->groups()->row();
+                        ?>
+                        <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown"><?= $user->first_name.' '.$user->last_name;?><i class="mdi-navigation-arrow-drop-down right"></i></a>
+                        <p class="user-roal"><?= $groups->name;?></p>
                     </div>
                 </div>
                 </li>
@@ -95,41 +99,7 @@
                 </li>
                 <li class="bold"><a href="<?= site_url('fablab/materiel');?>" class="waves-effect waves-cyan"><i class="mdi-hardware-memory"></i> Matériaux </a>
                 </li>
-                <li class="no-padding">
-                    <ul class="collapsible collapsible-accordion">
-                        <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-image-palette"></i> UI Elements</a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li><a href="ui-alerts.html">Alerts</a>
-                                    </li>
-                                    <li><a href="ui-buttons.html">Buttons</a>
-                                    </li>
-                                    <li><a href="ui-badges.html">Badges</a>
-                                    </li>
-                                    <li><a href="ui-breadcrumbs.html">Breadcrumbs</a>
-                                    </li>
-                                    <li><a href="ui-collections.html">Collections</a>
-                                    </li>
-                                    <li><a href="ui-collapsibles.html">Collapsibles</a>
-                                    </li>
-                                    <li><a href="ui-tabs.html">Tabs</a>
-                                    </li>
-                                    <li><a href="ui-navbar.html">Navbar</a>
-                                    </li>
-                                    <li><a href="ui-pagination.html">Pagination</a>
-                                    </li>
-                                    <li><a href="ui-preloader.html">Preloader</a>
-                                    </li>
-                                    <li><a href="ui-toasts.html">Toasts</a>
-                                    </li>
-                                    <li><a href="ui-tooltip.html">Tooltip</a>
-                                    </li>
-                                    <li><a href="ui-waves.html">Waves</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
+                <li class="bold"><a href="<?= site_url('fablab/materiel');?>" class="waves-effect waves-cyan"><i class="mdi-editor-attach-money"></i> Cotisations </a>
                 </li>
                 <li class="li-hover"><div class="divider"></div></li>
                 <li class="li-hover"><p class="ultra-small margin more-text">AUTRES</p></li>

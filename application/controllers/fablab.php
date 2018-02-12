@@ -7,27 +7,59 @@
     		$this->load->library('form_validation', 'session');
     	}
 
-      //ACCUEIL
+######################################################################################################
+
+      //ACCUEIL FABLAB
       public function index()
       {
+        if (!$this->ion_auth->logged_in())
+        {
+          redirect(site_url('fablab/login'));
+        }
+        else
+        {
+        $this->load->model('membre_model');
+        $this->load->model('visite_model');
+        $this->load->model('visiteur_model');
+
+        $data["liste_membre"] = $this->membre_model->lister_membre_asc();
+        $data["visite_actuel"] = $this->visite_model->lister_visite_aujourdhui();
+        $data["visiteur_actuel"] = $this->visiteur_model->lister_visiteur_actuel();
+
         $this->load->view('layouts/header');
-        $this->load->view('pages/accueil');
+        $this->load->view('pages/accueil', $data);
         $this->load->view('layouts/footer');
+        }
       }
+
+######################################################################################################
 
       //PAGE MEMBRE
       public function index_membre()
       {
+        if (!$this->ion_auth->logged_in())
+        {
+          redirect(site_url('fablab/login'));
+        }
+        else
+        {
         $this->load->model("membre_model");
         $data["liste_membre"] = $this->membre_model->lister_membre_asc();
         $this->load->view('layouts/header');
         $this->load->view('pages/membre/membre', $data);
         $this->load->view('layouts/footer');
+        }
       }
 
       //PAGE AJOUT Membre
       public function ajout_membre()
       {
+        if (!$this->ion_auth->logged_in())
+        {
+          redirect(site_url('fablab/login'));
+        }
+        else
+        {
         $this->load->library('form_validation');
           $this->form_validation->set_rules("nom_membre", "Nom", 'required');
           $this->form_validation->set_rules("prenom_membre", "Prénom(s)", 'required');
@@ -83,21 +115,35 @@
     			$this->load->view('pages/membre/ajout_membre');
     			$this->load->view('layouts/footer');
     		}
+        }
       }
 
       //PAGE DETAIL MEMBRE
       public function detail_membre($id_membre = '')
       {
+        if (!$this->ion_auth->logged_in())
+        {
+          redirect(site_url('fablab/login'));
+        }
+        else
+        {
         $this->load->model("membre_model");
         $data['membre'] = $this->membre_model->fetch_single_membre($id_membre);
         $this->load->view('layouts/header');
         $this->load->view('pages/membre/detail_membre', $data);
         $this->load->view('layouts/footer');
+        }
       }
 
       //MODIFIER MEMBRE
       public function modifier_membre($id_membre = '')
       {
+        if (!$this->ion_auth->logged_in())
+        {
+          redirect(site_url('fablab/login'));
+        }
+        else
+        {
         $this->load->library('form_validation');
           $this->form_validation->set_rules("nom_membre", "Nom", 'required');
           $this->form_validation->set_rules("prenom_membre", "Prénom(s)", 'required');
@@ -155,19 +201,35 @@
     			$this->load->view('pages/membre/modifier_membre', $data);
     			$this->load->view('layouts/footer');
     		}
+        }
       }
 
       //SUPPRESSION MEMBRE
       public function suppression_membre($id_membre='')
     	{
+        if (!$this->ion_auth->logged_in())
+        {
+          redirect(site_url('fablab/login'));
+        }
+        else
+        {
     		$this->load->model('membre_model');
     		$this->membre_model->supprimer_membre($id_membre);
     		redirect(site_url('fablab/index_membre'));
+        }
     	}
+
+######################################################################################################
 
       //PAGE VISITE
       public function visite()
     	{
+        if (!$this->ion_auth->logged_in())
+        {
+          redirect(site_url('fablab/login'));
+        }
+        else
+        {
         $this->load->library('form_validation');
         $this->form_validation->set_rules("id_membre", "Matricule membre", 'required');
     		if($this->form_validation->run())
@@ -197,19 +259,116 @@
           $this->load->view('pages/visite/visite_actuel', $data);
     			$this->load->view('layouts/footer');
     		}
+        }
     	}
 
       //ENREGISTRER SORTIE
       public function enregistrer_sortie($id_visite='')
       {
+        if (!$this->ion_auth->logged_in())
+        {
+          redirect(site_url('fablab/login'));
+        }
+        else
+        {
         $this->load->model('visite_model');
     		$this->visite_model->enregistrer_sortie($id_visite);
     		redirect(site_url('fablab/visite'));
+        }
       }
 
-      public function test()
+######################################################################################################
+
+      //PAGE VISITE
+      public function visiteur()
       {
-        $this->load->view('header');
-        $this->load->view('footer');
+        if (!$this->ion_auth->logged_in())
+        {
+          redirect(site_url('fablab/login'));
+        }
+        else
+        {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules("nom_prenom_visiteur", "Nom & prénom(s) visiteur", 'required');
+        if($this->form_validation->run())
+        {
+            $this->load->model('visiteur_model');
+            $data= array
+              (
+                'nom_prenom_visiteur'=>$this->input->post('nom_prenom_visiteur'),
+                'date_visite'=>date("Y-m-d"),
+                'heure_entre'=>date("H:i:s"),
+              );
+            if($this->input->post("entree"))
+              {
+                $this->visiteur_model->enregistrer_visiteur($data);
+                redirect(site_url('fablab/visiteur'));
+              }
+              else {
+                echo "ERROR";
+              }
+        }
+        else
+        {
+          $this->load->model("visiteur_model");
+          $data["visiteur_actuel"] = $this->visiteur_model->lister_visiteur_actuel();
+          $this->load->view('layouts/header');
+          $this->load->view('pages/visiteur/enregistrer_visiteur');
+          $this->load->view('pages/visiteur/visiteur_actuel', $data);
+          $this->load->view('layouts/footer');
+        }
+        }
+      }
+
+      //ENREGISTRER SORTIE
+      public function enregistrer_sortie_visiteur($id_visiteur='')
+      {
+        if (!$this->ion_auth->logged_in())
+        {
+          redirect(site_url('fablab/login'));
+        }
+        else
+        {
+        $this->load->model('visiteur_model');
+        $this->visiteur_model->enregistrer_sortie_visiteur($id_visiteur);
+        redirect(site_url('fablab/visiteur'));
+        }
+      }
+
+      public function login()
+      {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules("utilisateur", "Utilisateur", 'required');
+        $this->form_validation->set_rules("motdepasse", "Mot de passe", 'required');
+    		if($this->form_validation->run())
+        {
+          $identity = $this->input->post('utilisateur');
+      		$password = $this->input->post('motdepasse');
+          $remember = (bool)$this->input->post('remember-me');
+          if($this->input->post("connecter"))
+            {
+              if ($this->ion_auth->login($identity, $password, $remember))
+              {
+                $this->session->set_flashdata('message', $this->ion_auth->messages());
+                redirect(site_url('fablab/index'));
+              }else
+              {
+                $this->session->set_flashdata('message', $this->ion_auth->errors());
+        				redirect('fablab/login', 'refresh');
+              }
+            }
+            else {
+
+            }
+        }
+        else{
+        $this->load->view('user-login');
+        }
+      }
+
+      public function logout()
+      {
+        $this->ion_auth->logout();
+        redirect(site_url('fablab/index'));
       }
 }

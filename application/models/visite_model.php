@@ -17,6 +17,15 @@
       return $query;
 		}
 
+		//LISTE VISITE AUJOURD'HUI
+			public function lister_visite_aujourdhui(){
+				$this->db->select("*");
+	      $this->db->from("visite");
+	      $this->db->where("date_visite", date('Y-m-d'));
+	      $query = $this->db->get();
+	      return $query;
+			}
+
 	//SELECTION UNE VISITE
 		public function fetch_single_visite($id_visite='')
 	      {
