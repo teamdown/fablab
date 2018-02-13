@@ -392,7 +392,7 @@
 
             $this->form_validation->set_rules("utilisateur", "Nom d'utilisateur", 'required');
             $this->form_validation->set_rules("motdepasse", "Mot de passe", 'required');
-            $this->form_validation->set_rules("motdepasse_confirm", "Confirmation Mot de passe", 'required');
+            $this->form_validation->set_rules("motdepasse_confirm", "Confirmation Mot de passe", 'required|matches[motdepasse]');
             $this->form_validation->set_rules("email", "Email", 'required');
             $this->form_validation->set_rules("role", "Rôle", 'required');
             if($this->form_validation->run())
