@@ -47,7 +47,7 @@
             <nav class="navbar-color">
                 <div class="nav-wrapper">
                     <ul class="left">
-                      <li><h1 class="logo-wrapper"><a href="<?php echo site_url("fablab/index"); ?>" class="brand-logo darken-1"><img src="<?php echo img_url("Fablab-logo"); ?>" alt="Fablab Logo"></a> <span class="logo-text">HABAKA FABLAB</span></h1></li>
+                      <li><h1 class="logo-wrapper"><a href="<?php echo site_url("fablab/index"); ?>" class="brand-logo darken-1"><img src="<?php echo img_url("Fablab-logo.png"); ?>" alt="Fablab Logo"></a> <span class="logo-text">HABAKA FABLAB</span></h1></li>
                     </ul>
                 </div>
             </nav>
