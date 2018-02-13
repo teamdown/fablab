@@ -82,10 +82,10 @@
                         </ul>
                         <?php
                           $user = $this->ion_auth->user()->row();
-                          $groups = $this->ion_auth->groups()->row();
+                          $user_groups = $this->ion_auth->get_users_groups($user->id)->row();
                         ?>
-                        <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown"><?= $user->first_name.' '.$user->last_name;?><i class="mdi-navigation-arrow-drop-down right"></i></a>
-                        <p class="user-roal"><?= $groups->name;?></p>
+                        <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown"><?= $user->username;?><i class="mdi-navigation-arrow-drop-down right"></i></a>
+                        <p class="user-roal"><?=$user_groups->description;?></p>
                     </div>
                 </div>
                 </li>

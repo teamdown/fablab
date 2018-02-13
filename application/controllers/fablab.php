@@ -371,4 +371,64 @@
         $this->ion_auth->logout();
         redirect(site_url('fablab/index'));
       }
+      //Fin enregistrer_sortie
+
+      //AJOUT D'UTILISATEUR
+      public function ajout_utilisateur()
+      {
+        if (!$this->ion_auth->logged_in()) //Si non connecté
+        {
+          redirect('fablab/login', 'refresh');
+        }
+        else //si connecté
+        {
+          if (!$this->ion_auth->is_admin()) //Si non admin
+          {
+            redirect(site_url('fablab/index'));
+          }
+          else //Si admin
+          {
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules("utilisateur", "Nom d'utilisateur", 'required');
+            $this->form_validation->set_rules("motdepasse", "Mot de passe", 'required');
+            $this->form_validation->set_rules("motdepasse_confirm", "Confirmation Mot de passe", 'required');
+            $this->form_validation->set_rules("email", "Email", 'required');
+            $this->form_validation->set_rules("role", "Rôle", 'required');
+            if($this->form_validation->run())
+            {
+              $username = $this->input->post('utilisateur');
+              $password = $this->input->post('motdepasse');
+              $email = $this->input->post('email');
+              $additional_data = array(
+                                          'first_name' => $this->input->post('nom'),
+                                          'last_name' => $this->input->post('prenom'),
+                                      );
+              if ($this->input->post('role') == admin)
+              {
+                $group = array('1');// set user to admin
+              }
+              else
+              {
+                $group = array('2');
+              }
+
+              if ($this->input->post('ajouter')) // Si bouton Ajouter cliqué
+              {
+                $this->ion_auth->register($username, $password, $email, $additional_data, $group);
+                redirect(site_url('fablab/index'));
+              }
+              else {
+                echo "ERROR";
+              }
+            }
+            else // Sinon affiché formulaire d'ajout
+            {
+              $this->load->view('layouts/header');
+              $this->load->view('pages/admin/ajout_utilisateur');
+              $this->load->view('layouts/footer');
+            }
+          }
+        }
+      }
 }
