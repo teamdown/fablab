@@ -26,14 +26,14 @@
             </div>
             <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">FAB LAB</h5>
-                <p class="grey-text text-lighten-4">A sample polar chart to show sales by country.</p>
+                <p class="grey-text text-lighten-4">Atelier mettant à la disposition du public des outils de fabrication d'objets assistée par ordinateur.</p>
             </div>
         </div>
     </div>
     <div class="footer-copyright">
         <div class="container">
             Copyright © 2018 <a class="grey-text text-lighten-4" href="http://fablab.habaka.org" target="_blank">Habaka Fablab</a> All rights reserved.
-            <span class="right"> Design and Developed by <a class="grey-text text-lighten-4">Stéphan Christian</a></span>
+            <span class="right"> Design and Developed by <a class="grey-text text-lighten-4">Stéphan Christian</a> & <a class="grey-text text-lighten-4">Mamy Razafintsialonina</a></span>
         </div>
     </div>
 </footer>
