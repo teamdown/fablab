@@ -1,7 +1,7 @@
 <?php
 	if(!defined('BASEPATH')) exit('No Direct Script access allowed');
 
-	class membre_model extends CI_Model{
+	class Membre_model extends CI_Model{
 		private $table= 'membre';
 
 		public function __construct(){
