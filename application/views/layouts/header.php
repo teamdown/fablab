@@ -97,18 +97,8 @@
                 </li>
                 <li class="bold"><a href="<?= site_url('fablab/visiteur');?>" class="waves-effect waves-cyan"><i class="mdi-social-people-outline"></i> Visiteurs </a>
                 </li>
-                <li class="bold"><a href="<?= site_url('fablab/materiel');?>" class="waves-effect waves-cyan"><i class="mdi-hardware-memory"></i> Matériaux </a>
-                </li>
-                <li class="bold"><a href="<?= site_url('fablab/materiel');?>" class="waves-effect waves-cyan"><i class="mdi-editor-attach-money"></i> Cotisations </a>
                 </li>
                 <li class="li-hover"><div class="divider"></div></li>
-                <li class="li-hover"><p class="ultra-small margin more-text">AUTRES</p></li>
-                <li class="bold"><a href="app-calendar.html" class="waves-effect waves-cyan"><i class="mdi-action-book"></i> Réservations</a>
-                </li>
-                <li class="bold"><a href="app-calendar.html" class="waves-effect waves-cyan"><i class="mdi-action-work"></i> Projets</a>
-                </li>
-                <li class="bold"><a href="app-calendar.html" class="waves-effect waves-cyan"><i class="mdi-editor-insert-invitation"></i> Calendrier</a>
-                </li>
             </ul>
                 <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>
             </aside>
